@@ -1,0 +1,147 @@
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --board: #111827;
+  --grid: #1f2937;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #22c55e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  padding: 16px;
+}
+
+.game {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hud {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.hud h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.scores {
+  display: flex;
+  gap: 16px;
+  color: var(--muted);
+}
+
+.scores span {
+  color: var(--text);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.board-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--panel);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--board);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.8);
+  text-align: center;
+}
+
+.overlay.hidden { display: none; }
+
+.overlay h2 { margin: 0; font-size: 2rem; }
+.overlay p { margin: 0 0 8px; color: var(--muted); }
+
+kbd {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--panel);
+  border: 1px solid #334155;
+  font-size: 0.85em;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  color: var(--text);
+}
+
+#start-btn {
+  padding: 10px 28px;
+  background: var(--accent);
+  color: #052e16;
+  font-weight: 700;
+}
+
+#start-btn:hover { filter: brightness(1.1); }
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(2, 56px);
+  gap: 8px;
+  justify-content: center;
+}
+
+.controls button {
+  background: var(--panel);
+  font-size: 1.25rem;
+  touch-action: manipulation;
+}
+
+.controls button:active { background: #334155; }
+
+.controls [data-dir="up"]    { grid-column: 2; grid-row: 1; }
+.controls [data-dir="left"]  { grid-column: 1; grid-row: 2; }
+.controls [data-dir="down"]  { grid-column: 2; grid-row: 2; }
+.controls [data-dir="right"] { grid-column: 3; grid-row: 2; }
+
+.help {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Hide touch controls on devices with a fine pointer (mouse) */
+@media (hover: hover) and (pointer: fine) {
+  .controls { display: none; }
+}
